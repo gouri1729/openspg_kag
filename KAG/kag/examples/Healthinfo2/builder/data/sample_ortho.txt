@@ -1,0 +1,41 @@
+NAME: Joe Sam
+
+GENDER: Male
+
+AGE: 45
+
+MEDICAL SPECIALITY: Orthopedic
+ 
+SAMPLE NAME: Achilles Tendon Repair 
+
+DESCRIPTION: Achilles tendon rupture, left lower extremity. Primary repair left Achilles tendon. The 
+patient was stepping off a hilo at work when he felt a sudden pop in the posterior aspect of his left 
+leg. The patient was placed in posterior splint and followed up at ABC orthopedics for further care. 
+(Medical Transcription Sample Report) 
+
+PREOPERATIVE DIAGNOSIS: Achilles tendon rupture, left lower extremity. 
+
+POSTOPERATIVE DIAGNOSIS: Achilles tendon rupture, left lower extremity. 
+
+PROCEDURE PERFORMED: Primary repair left Achilles tendon. 
+
+ANESTHESIA: General. 
+
+COMPLICATIONS: None. 
+
+ESTIMATED BLOOD LOSS: Minimal. 
+
+TOTAL TOURNIQUET TIME: 40 minutes at 325 mmHg. 
+
+POSITION: Prone. 
+
+HISTORY OF PRESENT ILLNESS: The patient is a 26-year-old African-American male who states that 
+he was stepping off a hilo at work when he felt a sudden pop in the posterior aspect of his left leg. 
+The patient was placed in posterior splint and followed up at ABC orthopedics for further care. 
+
+PROCEDURE: After all potential complications, risks, as well as anticipated benefits of the above
+named procedure were discussed at length with the patient, informed consent was obtained. The 
+operative extremity was then confirmed with the patient, the operative surgeon, Department Of 
+Anesthesia, and nursing staff. While in this hospital, the Department Of Anesthesia administered 
+general anesthetic to the patient. The patient was then transferred to the operative table and placed 
+in the prone position. All bony prominences were well padded at this time.  

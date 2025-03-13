@@ -1,0 +1,349 @@
+namespace Healthinfo2
+
+
+Address(地址): EntityType
+	   properties:
+		    houseNo(门牌号): Integer
+		    street(街道): Text
+		    city(城市): Text
+		    state(州省): Text
+		    country(国家): Text
+		    postalCode(邮政编码): Integer
+
+PersonalDetails(个人信息): EntityType
+	properties:
+		personName(姓名): Text
+		age(年龄): Integer
+		gender(性别): Text
+		dob(出生日期): STD.Date
+		address(地址): Address
+		contact(联系方式): Text
+			properties:
+				mobile(手机号): Integer
+				email(电子邮件): Text
+
+Document(文件): ConceptType
+	hypernymPredicate: isA
+
+HospitalDepartment(医院科室): ConceptType
+	hypernymPredicate: isA
+
+Location(位置): EntityType
+	properties:
+		latitude(纬度): Float
+		longitude(经度): Float
+
+Hospital(医院): EntityType
+	properties:
+		hospName(名称): Text
+		organization(组织): Text
+		address(地址): Address
+		location(位置): Location
+		contact(联系方式): Text
+			properties:
+				phone(电话): Integer
+				mobile(手机号): Integer
+				email(电子邮件): Text
+		hospitalType(医院类型): Text
+		departments(科室): HospitalDepartment
+			constraint: MultiValue
+		accreditation(认证): Text
+		workingHours(工作时间): Text
+
+HumanBodyPart(人体部位): ConceptType
+	hypernymPredicate: isA
+
+Drug(药物): EntityType
+  properties:
+    drugName(药品名称): Text
+    chemicalName(化学名称): Text
+    drugClass(药物类别): Text
+    dosageForm(剂型): Text
+    strength(药物强度): Text
+    manufacturer(制造商): Text
+    approvalStatus(批准状态): Text
+    commonSideEffects(常见副作用): Text
+    contraindications(禁忌症): Text
+    interactions(相互作用): Drug
+      constraint: MultiValue
+    administrationRoute(给药途径): Text
+    recommendedDosage(推荐剂量): Text
+    maxDosagePerDay(每日最大剂量): Text
+    warnings(警告): Text
+    drugCategory(药物类别): Text
+    storageConditions(存储条件): Text
+    expiryDate(有效期): STD.Date
+    activeIngredients(活性成分): Drug
+      constraint: MultiValue
+    reportedIssues(报告问题): Text
+
+Medicine(药物): EntityType
+	properties:
+		classOfMedicine(药物类别): Text
+		ingredientDrugs(成分药物): Drug
+			constraint: MultiValue
+		sideeffects(副作用): Text
+		maxDosagePerDay(每日最大剂量): Text
+		dosageForm(剂型): Text
+		reportedIssues(报告的问题): Text
+		contraindications(禁忌症): Text
+		interactions(相互作用): Drug 
+			constraint: MultiValue
+		administrationRoute(给药途径): Text
+		prescriptionRequired(是否需要处方): Text
+		manufacturer(制造商): Text
+		storageInstructions(存储说明): Text
+		warnings(警告): Text
+		commonUses(常见用途): Text
+
+Allergy(过敏): EntityType
+	properties:
+		allergen(过敏原): Text
+		bodyPart(影响部位): HumanBodyPart
+		severity(严重程度): Text
+		symptoms(症状): Symptom
+		trigger(触发因素): Text
+		reactionTime(反应时间): Text
+		treatment(治疗): Text
+		duration(持续时间): Text
+
+Vaccine(疫苗): EntityType
+	properties:
+		desc(描述): Text
+		vacName(名称): Text
+		manufacturer(制造商): Text
+		vaccineType(疫苗类型): Text
+		batchNumber(批号): Text
+		efficacyRate(有效率): Integer
+		dosesRequired(所需剂量): Integer
+		dosageInterval(剂量间隔): Text
+		approvedAgeGroup(批准年龄组): Text
+		timeOfAdministration(给药时间): Text
+		administrationRoute(给药途径): Text
+		storageConditions(存储条件): Text
+		contraindications(禁忌症): Text
+		countryOfApproval(批准国家): Text
+		sideEffects(副作用): Text
+		reportedIssues(报告的问题): Text
+
+
+Doctor(医生): EntityType
+    properties:
+        personalInfo(个人信息): PersonalDetails
+        specialization(专科): Text
+        qualifications(资格): Text
+        experience(经验): Integer
+        hospitalAffiliation(医院隶属关系): Hospital
+            constraint: MultiValue
+        workingDays(工作日): Text
+        procedureExpertise(手术专长): Procedure
+            constraint: MultiValue
+        workingHours(工作时间): Text
+        licenseNumber(执照编号): Text
+        languagesSpoken(会说的语言): Text
+        achievements(成就): Text
+        consultationFee(咨询费): Float
+
+Episode(病程): EntityType
+  properties:
+    date(日期): STD.Date
+    severity(严重程度): Text
+    duration(持续时间): Text
+    treatment(治疗): Text
+    outcome(结果): Text
+
+
+Symptom(症状): EntityType
+    properties:
+        desc(描述): Text
+        severity(严重程度): Text
+        onset(发病时间): Text
+        duration(持续时间): Text
+        frequency(频率): Text
+        associatedConditions(相关疾病): Disease
+            constraint: MultiValue
+        aggravatingFactors(加重因素): Text
+        alleviatingFactors(缓解因素): Text 
+        relatedSymptoms(相关症状): Symptom
+            constraint: MultiValue
+        affectedBodyPart(受影响的身体部位): HumanBodyPart
+            constraint: MultiValue
+        typicalAgeGroup(典型年龄组): Text
+        previousEpisodes(既往发作): Episode
+            constraint: MultiValue
+           
+
+Surgery(手术): EntityType
+  properties:
+    surgName(手术名称): Text
+    date(日期): STD.Date
+    hospital(医院): Hospital
+    surgeon(主治医生): Doctor
+    reason(手术原因): Text
+    outcome(手术结果): Text
+    complications(并发症): Text
+    followUpRequired(是否需要随访): Text
+
+PastMedicalHistory(既往病史): EntityType
+          properties:
+            disease(疾病): DiseaseDetails
+                constraint: MultiValue
+            medicinesTook(服用的药物): Medicine
+                constraint: MultiValue
+
+FamilyHistory(家族病史): EntityType
+          properties:
+            disease(疾病): DiseaseDetails
+                constraint: MultiValue
+
+PresentIllness(现病史): EntityType
+          properties:
+            disease(疾病): DiseaseDetails
+
+MedicalHistory(病史): EntityType
+    properties:
+        desc(描述): Text
+        historyOfIllness(疾病史): Text
+        presentIllness(现病史): PresentIllness
+        pastMedicalHistory(既往病史): PastMedicalHistory
+        familyHistory(家族病史): FamilyHistory
+        socialHistory(社会史): Text
+        allergies(过敏史): Allergy
+            constraint: MultiValue
+        surgeries(手术史): Surgery
+            constraint: MultiValue
+        immunizations(免疫接种): Vaccine
+            constraint: MultiValue
+        smokingStatus(吸烟状况): Text
+        alcoholUse(饮酒情况): Text
+        exerciseHabits(锻炼习惯): Text
+        dietaryHabits(饮食习惯): Text
+
+Disease(疾病): ConceptType
+    hypernymPredicate: isA
+
+DiseaseDetails(疾病详情): EntityType
+    properties:
+        disName(名称): Disease
+        commonSymptom(常见症状): Symptom
+            constraint: MultiValue
+        onset(发病时间): Text
+        code(编码): Text
+        applicableMedicine(适用药物): Medicine
+            constraint: MultiValue
+        hospitalDepartment(相关科室): HospitalDepartment
+            constraint: MultiValue
+        diseaseSite(病变部位): HumanBodyPart
+            constraint: MultiValue
+        severity(严重程度): Text
+        complications(并发症): Disease
+            constraint: MultiValue
+        riskFactors(风险因素): Text
+        treatmentPlan(治疗方案): Text
+        transmissionMode(传播方式): Text
+        preventiveMeasures(预防措施): Text
+        epidemiology(流行病学): Text
+        prognosis(预后): Text
+        commonAgeGroup(常见年龄组): Text
+
+Examinations(检查): EntityType
+    properties:
+        physicalExamination(体检): Text
+        radiologicalExamination(放射检查): Text
+        nameOfProcedure(检查程序名称): Procedure
+            constraint: MultiValue
+        externalExamination(外部检查): Text
+        internalExamination(内部检查): Text
+        bloodTests(血液检测): Text
+        geneSequencing(基因测序): Text
+        immunologicalTests(免疫检测): Text
+        endoscopy(内窥镜检查): Text
+        otherExaminations(其他检查): Text
+
+Dosage(剂量): EntityType
+    properties:
+        desc(描述): Text
+        administrationRoute(给药途径): Text
+        frequency(服药频率): Text
+        duration(服药时间): Text
+        tapering(递减用量): Text
+        medication(药物): Medicine
+
+ProcedureType(手术类型): ConceptType
+    hypernymPredicate: isA
+
+Procedure(手术): EntityType
+    properties:
+        proceName(名称): ProcedureType
+        date(日期): STD.Date
+        procedureID(编号): Integer
+        findings(发现): Text
+        result(结果): Text
+
+MedicalReport(病历报告): EntityType
+    properties:
+        desc(描述): Text
+        personalDetails(个人信息): PersonalDetails
+        reportID(报告编号): Text 
+        reportType(报告类型): Document
+        dateOfReport(报告日期): STD.Date
+        history(病史): MedicalHistory
+            constraint: MultiValue
+        examinations(检查): Examinations
+            constraint: MultiValue
+        proceduresFollowed(实施手术): Procedure
+            constraint: MultiValue
+        presentDisease(当前疾病): Disease
+        medications(药物): Medicine
+            constraint: MultiValue
+        dosage(剂量): Dosage
+        summary(摘要): Text
+
+InsuranceDetails(保险详情): EntityType 
+    properties:
+        provider(保险公司): Text  
+        policyNumber(保单号码): Text
+        coverage(保险范围): Text
+
+Appointment(预约): EntityType
+    properties:
+        date(日期): STD.Date     		
+        time(时间): Text 
+        purpose(目的): Text
+
+Admission(入院): EventType
+    properties:
+        subject(病人): PersonalDetails
+        desc(描述): Text
+        personalDetails(个人信息): PersonalDetails
+        admDate(入院日期): STD.Date
+        roomNo(房间号): Integer
+        problems(症状): Symptom
+        confirmedIllness(确诊疾病): DiseaseDetails
+        insurance(保险): InsuranceDetails
+
+Discharge(出院): EventType
+    properties:
+        subject(病人): PersonalDetails
+        desc(描述): Text
+        admDate(入院日期): STD.Date
+        dischargeDate(出院日期): STD.Date
+        details(详细信息): MedicalReport
+        dischargeInstructions(出院指导): Text
+        followUpAppointments(复查预约): Appointment
+        dietaryRecommendations(饮食建议): Text
+        followUp(随访): Text
+
+Treatment(治疗): EventType
+    properties:
+        subject(病人): PersonalDetails
+        desc(描述): Text
+        medications(药物): Medicine
+            constraint: MultiValue
+        dosage(剂量): Dosage
+        physicalTherapy(物理治疗): Text
+        rest(休息): Text
+        lifestyleModifications(生活方式调整): Text
+        dietaryRecommendations(饮食建议): Text
+        otherTreatments(其他治疗): Text
+  
